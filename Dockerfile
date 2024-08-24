@@ -10,6 +10,10 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install gd zip pdo pdo_mysql
 
+# Establece valores personalizados para PHP
+RUN echo "upload_max_filesize=100M" > /usr/local/etc/php/conf.d/uploads.ini && \
+    echo "post_max_size=100M" >> /usr/local/etc/php/conf.d/uploads.ini
+
 # Configurar el directorio de trabajo
 WORKDIR /var/www/html
 
