@@ -21,6 +21,92 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
 
+## Laravel Project Setup and Execution with Docker
+
+### Step 1: Configure the `.env` File
+1. Access the `.env` file located in the project root.
+2. Set the following environment variables to match your development environment:
+
+    ```env
+    APP_NAME=Laravel
+    APP_ENV=local
+    APP_KEY=base64:...
+    APP_DEBUG=true
+    APP_URL=http://localhost
+    DB_CONNECTION=mysql
+    DB_HOST=db
+    DB_PORT=3306
+    DB_DATABASE=laravel
+    DB_PASSWORD=password
+    ```
+
+### Step 2: Build the Docker Image
+1. Run the following command to build the Docker image:
+
+    ```bash
+    docker-compose build
+    ```
+
+### Step 3: Start the Services with Docker Compose
+1. Start the services (application and database) with the following command:
+
+    ```bash
+    docker-compose up -d
+    ```
+
+### Step 4: Access the Application Container
+1. Access the application container:
+
+    ```bash
+    docker-compose exec app bash
+    ```
+
+### Step 5: Install PHP Dependencies
+1. Inside the container, install the PHP dependencies using Composer:
+
+    ```bash
+    composer install
+    ```
+
+### Step 6: Exit the Container
+1. Exit the container session:
+
+    ```bash
+    exit
+    ```
+
+### Step 7: Copy the SQL File to the Container
+1. Copy the `database.sql` file to the container:
+
+    ```bash
+    docker cp path/to/database.sql <container_id>:/tmp/database.sql
+    ```
+
+### Step 8: Import the Database
+1. Access the container again:
+
+    ```bash
+    docker exec -it <container_id> bash
+    ```
+2. Import the database using the following command:
+
+    ```bash
+    mysql -u user -p laravel < /tmp/database.sql
+    ```
+3. Remove the SQL file from the container:
+
+    ```bash
+    rm /tmp/database.sql
+    ```
+
+### Step 9: Set Permissions
+1. Ensure the `storage` directory has the correct permissions by running the following command:
+
+    ```bash
+    chmod o+w ./storage/ -R
+    ```
+
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
