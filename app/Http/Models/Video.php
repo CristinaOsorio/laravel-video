@@ -1,8 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Models\Comments;
+use App\Http\Models\User;
 
 class Video extends Model
 {
@@ -10,11 +12,11 @@ class Video extends Model
 
     // Relacion One To Many
     public function comments() {
-        return $this->hasMany('App\Comment')->orderBy('id', 'DESC');
+        return $this->hasMany(Comment::class)->orderBy('id', 'DESC');
     }
 
     // Relacion de Muchos a Uno
     public function user() {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

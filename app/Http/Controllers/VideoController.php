@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+
+use App\Http\Models\Video;
 
 class VideoController extends Controller
 {
@@ -22,7 +23,7 @@ class VideoController extends Controller
         $validated = $this->validate($request, [
             'title' => 'required|min:5',
             'description' => 'required',
-            'video'  => 'mimes:mp4'
+            'video'  => 'required|mimes:mp4'
         ]);
 
 

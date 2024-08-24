@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Video;
+use App\Http\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

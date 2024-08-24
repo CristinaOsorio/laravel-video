@@ -1,8 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
+use App\Http\Models\User;
+use App\Http\Models\Video;
+
 
 class Comment extends Model
 {
@@ -10,12 +14,12 @@ class Comment extends Model
 
     // Relacion de Muchos a Uno
     public function user() {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
      // Relacion de Muchos a Uno
      public function video() {
-        return $this->belongsTo('App\Video', 'video_id');
+        return $this->belongsTo(Video::class, 'video_id');
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\Http\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
