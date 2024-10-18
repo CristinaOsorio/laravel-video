@@ -1,7 +1,9 @@
 @forelse ($videos as $video)
-    <div class="media text-muted pt-3 border-bottom border-gray">
+    <div class="media text-muted py-2 border-bottom border-gray">
         @if (Storage::disk('images')->has($video->image))
-            <img class="video-image-mask" src="{{ url('/miniatura/' . $video->image) }}" alt="">
+            <img class="video-image-mask rounded" src="{{ url('/miniatura/' . $video->image) }}" alt="Miniatura del video">
+        @else
+            <img class="video-image-mask rounded" src="{{ asset('images/videos/miniature-lg.png') }}" alt="Sin miniatura del video">
         @endif
         <div class="media-body pl-3 pb-3 mb-0 lh-125 ">
             <div class="d-flex justify-content-between align-items-center w-100">
