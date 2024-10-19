@@ -16,4 +16,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .copy(
       'vendor/components/font-awesome/webfonts',
       'public/webfonts'
+)
+   .copy(
+      'resources/assets/images', 'public/images'
    );
