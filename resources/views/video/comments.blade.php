@@ -1,6 +1,5 @@
 <hr>
-<h5 >Comentarios</h5>
-<hr>
+<h5 class="mb-2 text-truncate font-weight-bold">Comentarios</h5>
 @if(Auth::check())
     @if(session('message'))
         <div class="alert alert-success col-12" role="alert">

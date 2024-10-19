@@ -4,19 +4,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <h2>{{ $video->title }}</h2>
-            <hr>
             <div class="row">
                 <div class="col-md-8">
-                    <video class="w-100" controls id="video-player">
+                    <video class="w-100 bg-dark rounded-lg" controls id="video-player" height="400" width="video-player">
                         <source src="{{ route('video-file', ['filename' => $video->video_path]) }}">
                         Tu navegador no es compatible con html5
                     </video>
-                    <div class="card video-data">
-                        <div class="card-header">
-                            Subido por <strong><a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}"> {{ $video->user->name . ' ' . $video->user->surname }}</a></strong> {{ \FormatTime::LongTimeFilter($video->created_at) }}
-                          </div>
-                        <div class="card-body">
+                    <div class="card border-0 bg-transparent">
+                        <div class="card-body px-0">
+                            <h5 class="mb-2 text-truncate font-weight-bold"> {{ $video->title }}</h5>
+                            <p class="card-subtitle mb-2 text-muted mb-3">
+                                <small>Subido por <strong><a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}"> {{ $video->user->name . ' ' . $video->user->surname }}</a></strong> {{ \FormatTime::LongTimeFilter($video->created_at) }}</small>
+                            </p>
+                            
                             <p class="card-text">
                                 {{ $video->description }}
                             </p>
