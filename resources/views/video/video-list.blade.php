@@ -5,7 +5,7 @@
         @else
             <img class="video-image-mask rounded" src="{{ asset('images/videos/miniature-lg.png') }}" alt="Sin miniatura del video">
         @endif
-        <div class="media-body pl-3 pb-3 mb-0 lh-125 ">
+        <div class="media-body pl-3 pb-3 mb-0">
             <div class="d-flex justify-content-between align-items-center w-100">
                 <strong class="text-gray-dark">
                     <h4 class="my-0 font-weight-normal">
@@ -16,7 +16,7 @@
                 </strong>
             </div>
             <p>
-                <a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}"> {{ $video->user->name . ' ' . $video->user->surname }}</a> |
+                <a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}"> {{ $video->user->nickname }}</a> |
                 {{ \FormatTime::LongTimeFilter($video->created_at) }}
             </p>
 

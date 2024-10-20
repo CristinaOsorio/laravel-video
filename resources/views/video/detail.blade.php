@@ -14,7 +14,7 @@
                         <div class="card-body px-0">
                             <h5 class="mb-2 text-truncate font-weight-bold"> {{ $video->title }}</h5>
                             <p class="card-subtitle mb-2 text-muted mb-3">
-                                <small>Subido por <strong><a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}"> {{ $video->user->name . ' ' . $video->user->surname }}</a></strong> {{ \FormatTime::LongTimeFilter($video->created_at) }}</small>
+                                <small>Subido por <strong><a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}"> {{ $video->user->nickname }}</a></strong> {{ \FormatTime::LongTimeFilter($video->created_at) }}</small>
                             </p>
                             
                             <p class="card-text">
