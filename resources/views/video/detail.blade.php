@@ -12,14 +12,53 @@
                     </video>
                     <div class="card border-0 bg-transparent">
                         <div class="card-body px-0">
+
                             <h5 class="mb-2 text-truncate font-weight-bold"> {{ $video->title }}</h5>
-                            <p class="card-subtitle mb-2 text-muted mb-3">
-                                <small>Subido por <strong><a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}"> {{ $video->user->nickname }}</a></strong> {{ \FormatTime::LongTimeFilter($video->created_at) }}</small>
-                            </p>
-                            
+
+                            <div class="d-flex justify-content-between">
+
+                                <p class="card-subtitle mb-2 text-muted mb-3">
+                                    <small>Subido por <strong><a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}"> {{ $video->user->nickname }}</a></strong> {{ \FormatTime::LongTimeFilter($video->created_at) }}</small>
+                                </p>
+                                
+
+                                <div>
+                                    {{--  Like Actions --}}
+                                    <a type="button" class="btn btn-primary"
+                                        onclick="event.preventDefault();
+                                                document.getElementById('video-like-form').submit();">
+                                        {{ __('👍') }}
+                                    </a>
+
+                                    <form id="video-like-form" action="{{ route('video.like', ['video_id' => $video->id]) }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                
+                                    <a type="button" class="btn btn-primary"
+                                        onclick="event.preventDefault();
+                                                document.getElementById('video-dislike-form').submit();">
+                                        {{ __('👎') }}
+                                    </a>
+
+                                    <form id="video-dislike-form" action="{{ route('video.dislike', ['video_id' => $video->id]) }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+
+                            </div>
                             <p class="card-text">
                                 {{ $video->description }}
                             </p>
+
+                            @if(session('status'))
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    {{ session('status') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
 
@@ -30,4 +69,3 @@
     </div>
 </div>
 @endsection
-
