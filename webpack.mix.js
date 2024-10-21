@@ -17,6 +17,13 @@ mix.js('resources/assets/js/app.js', 'public/js')
       'vendor/components/font-awesome/webfonts',
       'public/webfonts'
 )
-   .copy(
-      'resources/assets/images', 'public/images'
-   );
+.copy(
+   'resources/assets/images', 'public/images'
+);
+
+mix.browserSync('http://localhost:8080');
+
+if (mix.inProduction()) {
+   mix.version()
+}
+
