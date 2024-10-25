@@ -23,26 +23,17 @@
                                 
 
                                 <div>
-                                    {{--  Like Actions --}}
-                                    <a type="button" class="btn btn-primary"
-                                        onclick="event.preventDefault();
-                                                document.getElementById('video-like-form').submit();">
-                                        {{ __('👍') }}
-                                    </a>
 
-                                    <form id="video-like-form" action="{{ route('video.like', ['video_id' => $video->id]) }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                
-                                    <a type="button" class="btn btn-primary"
-                                        onclick="event.preventDefault();
-                                                document.getElementById('video-dislike-form').submit();">
-                                        {{ __('👎') }}
-                                    </a>
+                                    <button id="like-btn" class="btn" data-video-id="{{ $video->id }}">
+                                        <i class="fa-{{ $user_reaction === 'like' ? 'solid' : 'regular' }} fa-thumbs-up"></i>
+                                        <span id="likes-count">{{ $likes_count }}</span>
+                                    </button>
 
-                                    <form id="video-dislike-form" action="{{ route('video.dislike', ['video_id' => $video->id]) }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                                    <button id="dislike-btn" class="btn" data-video-id="{{ $video->id }}">
+                                        <i class="fa-{{ $user_reaction === 'dislike' ? 'solid' : 'regular' }} fa-thumbs-down"></i>
+                                        <span id="dislikes-count">{{ $dislikes_count }}</span>
+                                    </button>
+                                    
                                 </div>
 
                             </div>
@@ -68,4 +59,56 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+
+    <script>
+        $(document).ready(function() {
+
+            function updateReactionCounts(likesCount, dislikesCount, userReaction) {
+                $('#likes-count').text(likesCount);
+                $('#dislikes-count').text(likesCount);
+
+                if (userReaction === true) {
+                    $('#like-btn i').removeClass('fa-regular').addClass('fa-solid');
+                    $('#dislike-btn i').removeClass('fa-solid').addClass('fa-regular');
+                } else if (userReaction === false) {
+                    $('#dislike-btn i').removeClass('fa-regular').addClass('fa-solid');
+                    $('#like-btn i').removeClass('fa-solid').addClass('fa-regular');
+                } else {
+                    $('#like-btn i').removeClass('fa-solid').addClass('fa-regular');
+                    $('#dislike-btn i').removeClass('fa-solid').addClass('fa-regular');
+                }
+            }
+
+            async function handleReaction(videoId, isLike) {
+                try {
+                    const response = await $.ajax({
+                        url: `/videos/${videoId}/${isLike ? 'like' : 'dislike'}`,
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        }
+                    });
+                    updateReactionCounts(response.likes_count, response.dislikes_count, isLike);
+
+                } catch (error) {
+                    console.error('Error al actualizar la reacción:', error);
+                }
+            }
+
+            $('#like-btn').on('click', function() {
+                const videoId = $(this).data('video-id');
+                handleReaction(videoId, true);
+            });
+
+            $('#dislike-btn').on('click', function() {
+                const videoId = $(this).data('video-id');
+                handleReaction(videoId, false);
+            });
+
+        });
+
+    </script>
 @endsection

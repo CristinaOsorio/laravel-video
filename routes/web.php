@@ -43,6 +43,3 @@ Route::get('/video-file/{filename}', 'VideoController@getVideo')->name('video-fi
 
 Route::post('/comment', 'CommentController@store')->middleware('auth')->name('comment');
 Route::get('/comment/{comment_id}', 'CommentController@delete')->middleware('auth')->name('comment.delete');
-
-
-

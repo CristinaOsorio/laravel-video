@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 use App\Http\Models\Video;
+use App\Http\Models\VideoLike;
 
 class VideoController extends Controller
 {
-
 
     public function create() {
         return view('video.create');
@@ -25,7 +25,6 @@ class VideoController extends Controller
             'description' => 'required',
             'video'  => 'required|mimes:mp4'
         ]);
-
 
         $video = new Video;
 
@@ -65,15 +64,38 @@ class VideoController extends Controller
     }
 
     public function detail($video_id) {
-        $video = Video::where('id', $video_id)->first();
-        return view('video.detail')->with('video', $video);
+        $video = Video::with(['likes', 'dislikes'])->find($video_id);
+
+        if (!$video) {
+            return redirect()->route('home');
+        }
+
+        $likesCount = $video->likes()->count();
+        $dislikesCount = $video->dislikes()->count();
+
+        $userReaction = null;
+        if (Auth::check()) {
+            $userLike = VideoLike::where('user_id', Auth::id())
+                                ->where('video_id', $video_id)
+                                ->first();
+
+            if ($userLike) {
+                $userReaction = $userLike->is_like ? 'like' : 'dislike';
+            }
+        }
+
+        return view('video.detail',[
+            'video' => $video,
+            'likes_count' => $likesCount,
+            'dislikes_count' => $dislikesCount,
+            'user_reaction' => $userReaction,
+        ]);
     }
 
     public function delete($video_id) {
         $user  = Auth::user();
         $video = Video::find($video_id);
         $comments = $video->comments();
-        // dd($comments);
 
         if($user && $video->user_id == $user->id) {
             // Eliminar comentarios
