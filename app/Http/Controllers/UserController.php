@@ -20,12 +20,26 @@ class UserController extends Controller
         return response()->json(['message' => 'Hello, user!']);
     }
     
-    public function channel($user_id) {
+    public function channel(Request $request,$user_id) {
         $user = User::find($user_id);
+
         if (!is_object($user)) {
             return redirect()->route('home');
         }
-        $videos = Video::withCount('likes')->withCount('dislikes')->where('user_id', $user_id)->paginate(5);
-        return view('user.channel')->with('user', $user)->with('videos', $videos);
+
+    $filter = $request->input('sort', "recent");
+    $filterConfig = config("filters.{$filter}");
+    
+    $videos = Video::withCount('likes', 'dislikes', 'comments')
+        ->where('user_id', $user_id)
+        ->orderBy($filterConfig['order_by'], $filterConfig['direction'])
+        ->paginate(5);
+
+        if ($request->ajax()) {
+            return view('user.partials.videos', compact('videos'))->render();
+        }
+
+        return view('user.channel', compact('user', 'videos'));
+
     }
 }
