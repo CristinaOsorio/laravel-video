@@ -45,10 +45,11 @@
                 return; // Salir de la función
             }
 
+            const videosList = document.getElementById('videos-list');
+            videosList.classList.add('inactive');
+
             const userId = {{ $user->id }};
             const url = `/channel/${userId}?sort=${sort}`;
-
-            const activeButton = document.querySelector(`button active`);
             
             fetch(url, {
                 headers: {
@@ -63,10 +64,6 @@
                     .forEach(button => {
                         button.classList.remove('active');
                     });
-
-                    console.log(sort);
-                    
-
                 // Establecer el botón activo y deshabilitarlo
                 const activeButton = document.querySelector(`button[data-sort="${sort}"]`);
                 activeButton.classList.add('active');
@@ -74,7 +71,10 @@
                 currentSort = sort;
 
             })
-            .catch(error => console.error('Error fetching videos:', error));
+            .catch(error => console.error('Error fetching videos:', error))
+            .finally(() => {
+                videosList.classList.remove('inactive');
+            });
         }
 
     </script>

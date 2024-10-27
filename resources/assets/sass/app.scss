@@ -52,3 +52,13 @@
 .jumbotron {
   padding: 5rem 1rem 1rem 1rem;
 }
+
+.inactive {
+  filter: blur(1px);
+  background-color: rgba(255, 255, 255, 0.8);
+  opacity: 0.5;
+  pointer-events: none;
+  transition:
+    background-color 0.3s ease,
+    opacity 0.3s ease;
+}
