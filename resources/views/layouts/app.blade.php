@@ -12,13 +12,14 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
-    <div id="app">
+    <div class="min-vh-100 d-flex flex-column " id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                   Videos Laravel
+                <a class="navbar-brand bg-primary p-1 rounded-lg text-white" href="{{ url('/') }}">
+                   <span class="font-weight-lighter">Videos</span> | <span class="font-weight-bold"> App</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -80,18 +81,22 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="flex-grow-1 py-4">
             @yield('content')
         </main>
 
-        <footer class="col-md-10 col-md-offset-1">
-            <hr>
-            <p>Curso de Laravel</p>
+        <footer class="col-md-12">
+            <div class="d-flex items-center justify-between mx-auto border-top p-4">
+                <div class="text-sm font-bold "> 
+                    2024 - By <a href="https://www.linkedin.com/in/maria-cristina-osorio-perez-b205a5187" target="_blank" aria-label="Ir al perfil de Github" class="hover:underline text-blue-700 dark:text-sky-500 font-semibold">Cristina Osorio</a>
+                </div>
+            </div>
         </footer>
-    </div>
+
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
     @yield('js')
+
 </body>
 </html>
