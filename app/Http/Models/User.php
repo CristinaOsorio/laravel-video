@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Http\Models\VideoLike;
-
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -39,5 +39,10 @@ class User extends Authenticatable
 
     public function videoLikes() {
         return $this->hasMany(VideoLike::class);
+    }
+    
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d \d\e F \d\e Y');
     }
 }

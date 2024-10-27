@@ -25,8 +25,7 @@ class UserController extends Controller
         if (!is_object($user)) {
             return redirect()->route('home');
         }
-        $videos = Video::where('user_id', $user_id)->paginate(5);
-
+        $videos = Video::withCount('likes')->withCount('dislikes')->where('user_id', $user_id)->paginate(5);
         return view('user.channel')->with('user', $user)->with('videos', $videos);
     }
 }
