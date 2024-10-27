@@ -9,7 +9,7 @@
             <div class="d-flex justify-content-between align-items-center w-100">
                 <strong class="text-gray-dark">
                     <h4 class="my-0 font-weight-normal">
-                        <a href="{{ route('video.detail', ['video_id' => $video->id]) }}">
+                        <a class="line-clamp-1" href="{{ route('video.detail', ['video_id' => $video->id]) }}" title="{{ $video->title }}">
                             {{ $video->title }}
                         </a>
                     </h4>

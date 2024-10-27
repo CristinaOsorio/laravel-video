@@ -15,7 +15,7 @@
 
                 <div class="card-body d-flex justify-content-between flex-column">
                     <p class="card-title">
-                        <a class="line-clamp" href="{{ route('video.detail', ['video_id' => $video->id]) }}" title="{{ $video->title }}">
+                        <a class="line-clamp-2" href="{{ route('video.detail', ['video_id' => $video->id]) }}" title="{{ $video->title }}">
                             {{ $video->title }}
                         </a>
                     </p>

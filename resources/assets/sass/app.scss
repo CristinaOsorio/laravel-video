@@ -21,11 +21,15 @@
 }
 
 .line-clamp {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
+  @for $i from 1 through 4 {
+    &-#{$i} {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: $i;
+    }
+  }
 }
 
 .card-img-top {
