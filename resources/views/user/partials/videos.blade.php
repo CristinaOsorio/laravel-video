@@ -30,8 +30,6 @@
         <!-- Fin de Video Card -->
         @empty
 
-        {{ $videos->links() }}
-
         <div class="col-md-12 col-lg-12 text-center py-4">
             <h3>No hay videos para mostrar</h3>
         </div>

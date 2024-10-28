@@ -25,12 +25,18 @@
                     <button class="btn btn-outline-primary" data-sort="likes" onclick="fetchVideos('likes')">{{ config('filters.likes.label') }}</button>
                     <button class="btn btn-outline-primary" data-sort="comments" onclick="fetchVideos('comments')">{{ config('filters.comments.label') }}</button>
                 </div>
+
+                <div class="col d-flex justify-content-end">
+                    @include('partials.pagination', ['paginator' => $videos])
+                </div>
             </div>
         @endif
 
         <div id="videos-list">
             @include('user.partials.videos', ['videos' => $videos])
         </div>
+
+        @include('partials.pagination', ['paginator' => $videos])
 
 @endsection
 

@@ -33,7 +33,7 @@ class UserController extends Controller
     $videos = Video::withCount('likes', 'dislikes', 'comments')
         ->where('user_id', $user_id)
         ->orderBy($filterConfig['order_by'], $filterConfig['direction'])
-        ->paginate(5);
+        ->paginate(12);
 
         if ($request->ajax()) {
             return view('user.partials.videos', compact('videos'))->render();
