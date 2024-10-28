@@ -13,6 +13,8 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
+    @yield('css')
+
 </head>
 <body>
     <div class="min-vh-100 d-flex flex-column " id="app">
