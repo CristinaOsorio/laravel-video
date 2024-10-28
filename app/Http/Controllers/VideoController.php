@@ -21,9 +21,10 @@ class VideoController extends Controller
 
     public function store(Request $request) {
         $validated = $this->validate($request, [
-            'title' => 'required|min:5',
-            'description' => 'required',
-            'video'  => 'required|mimes:mp4'
+            'title' => 'required|min:5|max:255',
+            'description' => 'required|max:250',
+            'video'  => 'required|mimes:mp4|max:5120',  // 5 MB
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 2 MB
         ]);
 
         $video = new Video;
@@ -50,7 +51,7 @@ class VideoController extends Controller
 
         $video->save();
 
-        return redirect()->route('home')->with(array('message' => 'El video se ha subido correctamente'));
+        return redirect()->route('user.channel', ['id'=>$user->id])->with(array('message' => 'El video se ha subido correctamente'));
     }
 
     public function getImage($filename) {
@@ -116,7 +117,7 @@ class VideoController extends Controller
         }
 
         return redirect()
-                        ->route('home')
+                        ->route('user.channel', ['id' => $user->id])
                         ->with($message);
     }
 
@@ -134,7 +135,8 @@ class VideoController extends Controller
         $validated = $this->validate($request, [
             'title' => 'required|min:5',
             'description' => 'required',
-            'video'  => 'mimes:mp4'
+            'video'  => 'mimes:mp4|max:5120',  // 5 MB
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 2 MB
         ]);
 
         $user = Auth::user();
@@ -164,7 +166,7 @@ class VideoController extends Controller
         $video->update();
 
         return redirect()
-                        ->route('home')
+                        ->route('user.channel', ['id'=>$user->id])
                         ->with('message', 'El video a sido actualizado exitosamente.');
 
     }
