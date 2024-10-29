@@ -188,7 +188,7 @@ class VideoController extends Controller
         }
 
         $order_by = $this->order_type($order);
-        $videos = Video::where('title', 'LIKE', '%' .$search . '%')->orderBy($order_by['column'], $order_by['order'])->paginate(10);
+        $videos = Video::withCount('likes', 'dislikes', 'comments')->where('title', 'LIKE', '%' .$search . '%')->with('user')->orderBy($order_by['column'], $order_by['order'])->paginate(12);
         return view('video.search', array('videos' => $videos, 'search' => $search, 'order' => $order));
     }
 

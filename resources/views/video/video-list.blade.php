@@ -5,6 +5,7 @@
                 'image' => Storage::disk('images')->has($video->image) ? url('/miniatura/' . $video->image) : asset('images/videos/miniature-lg.png'),
                 'videoId' => $video->id,
                 'userId' => $video->user->id,
+                'userNickname' => $video->user->nickname,
                 'time' => \FormatTime::LongTimeFilter($video->created_at),
                 'likes' => $video->likes_count,
                 'dislikes' => $video->dislikes_count,
