@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand bg-primary p-1 rounded-lg text-white" href="{{ url('/') }}">
-                   <span class="font-weight-lighter">Videos</span> | <span class="font-weight-bold"> App</span>
+                    <span class="font-weight-lighter">Videos</span> | <span class="font-weight-bold"> App</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -33,16 +33,17 @@
                         <li>
                             <a class="navbar-brand" href="{{ url('/') }}">
                                 Inicio
-                             </a>
+                            </a>
                         </li>
                     </ul>
 
                     <form class="navbar-form navbar-left form-inline" role="search" action="{{ route('video.search') }}">
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="search" placeholder="¿Que quieres ver?"/>
-                            <button class="btn btn-default ml-1" type="submit">
-                                Buscar
-                            </button>
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="¿Que quieres ver?" aria-label="¿Que quieres ver?" aria-describedby="search">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" id="search">Buscar</button>
+                            </div>
                         </div>
                     </form>
 
