@@ -27,13 +27,13 @@ class UserController extends Controller
             return redirect()->route('home');
         }
 
-    $filter = $request->input('sort', "recent");
-    $filterConfig = config("filters.{$filter}");
-    
-    $videos = Video::withCount('likes', 'dislikes', 'comments')
-        ->where('user_id', $user_id)
-        ->orderBy($filterConfig['order_by'], $filterConfig['direction'])
-        ->paginate(12);
+        $filter = $request->input('sort', "recent");
+        $filterConfig = config("filters.{$filter}");
+        
+        $videos = Video::withCount('likes', 'dislikes', 'comments')
+            ->where('user_id', $user_id)
+            ->orderBy($filterConfig['order_by'], $filterConfig['direction'])
+            ->paginate(12);
 
         if ($request->ajax()) {
             return view('user.partials.videos', compact('videos'))->render();
