@@ -69,7 +69,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -88,14 +88,12 @@
             @yield('content')
         </main>
 
-        <footer class="col-md-12">
-            <div class="d-flex items-center justify-between mx-auto border-top p-4">
-                <div class="text-sm font-bold "> 
-                    2024 - By <a href="https://www.linkedin.com/in/maria-cristina-osorio-perez-b205a5187" target="_blank" aria-label="Ir al perfil de Github" class="hover:underline text-blue-700 dark:text-sky-500 font-semibold">Cristina Osorio</a>
-                </div>
-            </div>
-        </footer>
+        <footer class="col-md-12 text-center border-top p-4">
 
+            <p class="text-muted mb-0">VideoApp – Plataforma para compartir y descubrir videos, desarrollada con Laravel y Bootstrap por <a href="https://www.linkedin.com/in/maria-cristina-osorio-perez-b205a5187" target="_blank" aria-label="Ir a perfil de Linkedin">Cristina Osorio</a>.
+            </p>
+
+        </footer>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
