@@ -32,10 +32,12 @@
             </div>
         @endif
 
+        <!-- Listado de videos del usuario -->
         <div id="videos-list">
-            @include('user.partials.videos', ['videos' => $videos])
+            @include('user.partials.video-list', ['videos' => $videos])
         </div>
 
+        <!-- Página de paginación -->
         @include('partials.pagination', ['paginator' => $videos])
 
 @endsection

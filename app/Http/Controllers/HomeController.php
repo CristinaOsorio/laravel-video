@@ -24,7 +24,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index () {
-        $videos = Video::orderBy('id', 'DESC')->paginate(5);
+        $videos = Video::withCount('likes', 'dislikes', 'comments')->orderBy('id', 'DESC')->paginate(12);
         return view('home')->with('videos', $videos);
     }
 
