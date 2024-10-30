@@ -40,9 +40,9 @@
                     <form class="navbar-form navbar-left form-inline" role="search" action="{{ route('video.search') }}">
 
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="¿Que quieres ver?" aria-label="¿Que quieres ver?" aria-describedby="search">
+                            <input type="text"  name="search" class="form-control" placeholder="¿Que quieres ver?" aria-label="¿Que quieres ver?" aria-describedby="search">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="search">Buscar</button>
+                                <button class="btn btn-primary" type="submit" id="search">Buscar</button>
                             </div>
                         </div>
                     </form>
