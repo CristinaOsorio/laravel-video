@@ -1,21 +1,20 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
+@section('content')<div class="container">
     <div class="row mb-4">
         <div class="col-md-8 d-flex align-items-center">
-            <h5 class="font-weight-bolder mb-0">Búsqueda: {{ $search }}</h5>
+            <h5 class="font-weight-bolder mb-0">{{ trans('videos.search.title', ['search' => $search]) }}</h5>
         </div>
 
         <div class="col-md-4">
             <form class="form-inline float-right" role="order" action="{{ route('video.search', ['search' => $search]) }}">
-                <label for="order" class="mr-4">Ordenar</label>
+                <label for="order" class="mr-4">{{ trans('videos.search.order_label') }}</label>
                 <select class="form-control" id="order" name="order">
-                    <option value="new"><a href=""> Recientes</option>
-                    <option value="old">Antiguos</option>
-                    <option value="alfa ">A-Z</option>
+                    <option value="new">{{ trans('videos.search.order_options.new') }}</option>
+                    <option value="old">{{ trans('videos.search.order_options.old') }}</option>
+                    <option value="alfa">{{ trans('videos.search.order_options.alfa') }}</option>
                 </select>
-                <button class="btn btn-primary ml-4" type="submit">Ordenar</button>
+                <button class="btn btn-primary ml-4" type="submit">{{ trans('videos.search.order_label') }}</button>
             </form>
         </div>
     </div>
@@ -37,7 +36,7 @@
                 ])
         @empty
             <div class="alert alert-warning mt-3" role="alert">
-                No existen videos.
+                {{ trans('videos.no_videos') }}
             </div>
         @endforelse
     </div>
@@ -45,4 +44,5 @@
     @include('partials.pagination', ['paginator' => $videos])
         
 </div>
+
 @endsection

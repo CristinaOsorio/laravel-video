@@ -14,7 +14,7 @@
                             @if(isset($item['data-toggle'])) data-toggle="{{ $item['data-toggle'] }}" @endif
                             @if(isset($item['role'])) role="{{ $item['role'] }}" @endif
                         >
-                            {{ $item['label'] }}
+                            {{ trans($item['label']) }}
                         </a>
                     @endforeach
                 </div>
@@ -23,7 +23,7 @@
 
         <!-- Imagen de la tarjeta -->
         <figure class="card-img-top mb-0">
-            <img class="card-img-top" src="{{ $image }}" alt="Miniatura del video">
+            <img class="card-img-top" src="{{ $image }}" alt="{{ trans('video.video_thumbnail_alt') }}">
         </figure>
 
         <!-- Cuerpo de la tarjeta -->
@@ -33,7 +33,7 @@
             </a>
             <div>
                 <a class="card-text line-clamp-1 mb-0" href="{{ route('user.channel', ['user_id' => $userId]) }}" title="{{ $userNickname }}">
-                   <small class=" text-muted text-secondary font-weight-bold">{{ $userNickname }}</small>
+                    <small class="text-muted text-secondary font-weight-bold">{{ $userNickname }}</small>
                 </a>
                 <div class="d-flex justify-content-between align-items-center">
                     <p class="card-text mb-0 capitalize-first-letter">

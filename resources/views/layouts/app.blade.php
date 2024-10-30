@@ -32,7 +32,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li>
                             <a class="navbar-brand" href="{{ url('/') }}">
-                                Inicio
+                                {{ trans('home.home') }}
                             </a>
                         </li>
                     </ul>
@@ -40,9 +40,9 @@
                     <form class="navbar-form navbar-left form-inline" role="search" action="{{ route('video.search') }}">
 
                         <div class="input-group">
-                            <input type="text"  name="search" class="form-control" placeholder="¿Que quieres ver?" aria-label="¿Que quieres ver?" aria-describedby="search">
+                            <input type="text"  name="search" class="form-control" placeholder="{{ trans('home.search_placeholder') }}" aria-label="{{ trans('home.search_placeholder') }}" aria-describedby="search">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit" id="search">Buscar</button>
+                                <button class="btn btn-primary" type="submit" id="search">{{ trans('home.search') }}</button>
                             </div>
                         </div>
                     </form>
@@ -59,7 +59,7 @@
                             </li>
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('video.store') }}">Subir vídeo</a>
+                            <a class="nav-link" href="{{ route('video.store') }}">{{ trans('home.upload_video') }}</a>
                         </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -90,8 +90,7 @@
 
         <footer class="col-md-12 text-center border-top p-4">
 
-            <p class="text-muted mb-0">VideoApp – Plataforma para compartir y descubrir videos, desarrollada con Laravel y Bootstrap por <a href="https://www.linkedin.com/in/maria-cristina-osorio-perez-b205a5187" target="_blank" aria-label="Ir a perfil de Linkedin">Cristina Osorio</a>.
-            </p>
+            <p class="text-muted mb-0">{{ trans('home.footer') }} <a href="https://www.linkedin.com/in/maria-cristina-osorio-perez-b205a5187" target="_blank" aria-label="{{ trans('home.linkedin_profile') }}">Cristina Osorio</a>.</p>
 
         </footer>
 

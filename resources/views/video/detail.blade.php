@@ -8,22 +8,20 @@
                 <div class="col-md-8">
                     <video class="w-100 bg-dark rounded-lg" controls id="video-player" height="400" width="video-player">
                         <source src="{{ route('video-file', ['filename' => $video->video_path]) }}">
-                        Tu navegador no es compatible con html5
+                        {{ trans('videos.playback.no_html5') }}
                     </video>
                     <div class="card border-0 bg-transparent">
                         <div class="card-body px-0">
 
-                            <h5 class="mb-2 text-truncate font-weight-bold"> {{ $video->title }}</h5>
+                            <h5 class="mb-2 text-truncate font-weight-bold">{{ $video->title }}</h5>
 
                             <div class="d-flex justify-content-between">
 
                                 <p class="card-subtitle mb-2 text-muted mb-3">
-                                    <small>Subido por <strong><a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}"> {{ $video->user->nickname }}</a></strong> {{ \FormatTime::LongTimeFilter($video->created_at) }}</small>
+                                    <small>{{ trans('videos.playback.uploaded_by') }} <strong><a href="{{ route('user.channel', ['user_id' => $video->user->id]) }}">{{ $video->user->nickname }}</a></strong> {{ \FormatTime::LongTimeFilter($video->created_at) }}</small>
                                 </p>
                                 
-
                                 <div>
-
                                     <button id="like-btn" class="btn" data-video-id="{{ $video->id }}">
                                         <i class="fa-{{ $user_reaction === 'like' ? 'solid' : 'regular' }} fa-thumbs-up"></i>
                                         <span id="likes-count">{{ $likes_count }}</span>
@@ -33,7 +31,6 @@
                                         <i class="fa-{{ $user_reaction === 'dislike' ? 'solid' : 'regular' }} fa-thumbs-down"></i>
                                         <span id="dislikes-count">{{ $dislikes_count }}</span>
                                     </button>
-                                    
                                 </div>
 
                             </div>
@@ -60,6 +57,7 @@
     </div>
 </div>
 @endsection
+
 
 @section('js')
 

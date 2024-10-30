@@ -2,10 +2,10 @@
 
 @section('content')
     @include('partials.video_form', [
-        'formTitle' => 'Editar Video',
-        'formSubtitle' => 'Modifica los campos a continuación para actualizar tu video.',
+        'formTitle' => trans('videos.edit.form_title'),
+        'formSubtitle' => trans('videos.edit.form_subtitle'),
         'formAction' => route('video.update', $video->id),
-        'buttonText' => 'Actualizar Video',
+        'buttonText' => trans('videos.edit.button_text'),
         'isEdit' => true,
         'video' => $video,
     ])

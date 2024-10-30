@@ -68,10 +68,9 @@
         }
     </style>
 @endsection
-
 <div class="upload-form">
-    <h2>{{ $formTitle ?? 'Subir tu video' }}</h2>
-    <p>{{ $formSubtitle ?? 'Completa los campos a continuación para compartir tu video con la comunidad.' }}</p>
+    <h2>{{ $formTitle ?? trans('videos.video_form.title') }}</h2>
+    <p>{{ $formSubtitle ?? trans('videos.video_form.subtitle') }}</p>
 
     <form id="videoUploadForm" action="{{ $formAction }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -92,33 +91,32 @@
 
         <!-- Campo Título del video -->
         <div class="form-group">
-            <label for="title">Título del video</label>
+            <label for="title">{{ trans('videos.video_form.form.title') }}</label>
             <input type="text" id="title" name="title" 
                    value="{{ old('title', $video->title ?? '') }}" 
                    class="form-control" 
-                   placeholder="Ingresa el título del video">
+                   placeholder="{{ trans('videos.video_form.form.title') }}">
         </div>
 
         <!-- Campo Descripción con contador de caracteres -->
         <div class="form-group">
-            <label for="description">Descripción</label>
-            <textarea id="description" name="description" class="form-control" rows="4" placeholder="Descripción del video" maxlength="500">{{ old('description', $video->description ?? '') }}</textarea>
-            <div class="char-counter" id="charCounter">0 / 250</div>
+            <label for="description">{{ trans('videos.video_form.form.description') }}</label>
+            <textarea id="description" name="description" class="form-control" rows="4" placeholder="{{ trans('videos.video_form.form.description') }}" maxlength="500">{{ old('description', $video->description ?? '') }}</textarea>
+            <div class="char-counter" id="charCounter">{{ trans('videos.video_form.form.char_counter') }}</div>
         </div>
 
         <!-- Cargar miniatura con vista previa -->
         <div class="form-group">
-            <label for="image">Subir miniatura</label>
+            <label for="image">{{ trans('videos.video_form.form.upload_thumbnail') }}</label>
             <input type="file" id="image" name="image" class="form-control-file" accept="image/*" aria-describedby="imageHelpBlock">
-            <small id="imageHelpBlock" class="form-text text-muted">Recomendado: 200px x 140px (jpg, png).</small>
+            <small id="imageHelpBlock" class="form-text text-muted">{{ trans('videos.video_form.form.thumbnail_help') }}</small>
             
             <img id="imagePreview" class="image-preview" src="{{ isset($video) && $video->image ? '/miniatura/'.$video->image : '' }}" style="{{ isset($video) && $video->image ? '' : 'display: none;' }}" />
-
         </div>
 
         <!-- Campo de carga del video y vista previa -->
         <div class="form-group">
-            <label for="video">Subir video</label>
+            <label for="video">{{ trans('videos.video_form.form.upload_video') }}</label>
             <input type="file" id="video" name="video" class="form-control-file" accept="video/*">
             <video id="videoPreview" class="video-preview bg-dark" controls style="{{ isset($video) && $video->video_path ? '' : 'display: none;' }}">
                 @if (isset($video) && $video->video_path)
@@ -128,8 +126,8 @@
         </div>
 
         <!-- Botones de acción -->
-        <button type="submit" class="btn btn-primary btn-upload">{{ $buttonText ?? 'Subir Video' }}</button>
-        <a href="{{ url('user.channel', auth()->id()) }}" class="btn btn-secondary btn-cancel">Cancelar</a>
+        <button type="submit" class="btn btn-primary btn-upload">{{ $buttonText ?? trans('videos.video_form.form.submit') }}</button>
+        <a href="{{ url('user.channel', auth()->id()) }}" class="btn btn-secondary btn-cancel">{{ trans('videos.video_form.form.cancel') }}</a>
     </form>
 </div>
 

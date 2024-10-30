@@ -14,7 +14,7 @@
             ])
     @empty
         <div class="alert alert-warning mt-3" role="alert">
-            No existen videos.
+            {{ trans('videos.no_videos') }}
         </div>
     @endforelse
 </div>

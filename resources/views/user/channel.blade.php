@@ -1,55 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">        
+    <!-- Banner con información de usuario -->
+    <div class="jumbotron d-flex">
+        <div class="profile-icon mb-0 mr-4 h1 font-weight-bold">{{ strtoupper($user->nickname[0]) }}</div>
+        <div class="my-auto">
+            <h2 class="mb-0 font-weight-bold">{{ $user->nickname }}</h2>
+            <p class="lead mb-0 text-muted small">{{ trans('user.channel.joined', ['date' => $user->created_at]) }}</p>
+            <p class="lead mb-0"><span class="badge badge-dark">{{ trans('user.channel.video_count', ['count' => $videos->total()]) }}</span></p>
+        </div>
+    </div>
 
-    <div class="container">        
-        <!-- Banner con información de usuario -->
-        <div class="jumbotron d-flex">
-            <div class="profile-icon mb-0 mr-4 h1 font-weight-bold">{{ strtoupper($user->nickname[0]) }}</div>
-            <div class="my-auto">
-                
-                <h2 class="mb-0 font-weight-bold">{{ $user->nickname }}</h2>
-                <p class="lead mb-0 text-muted small">Se unio el {{ $user->created_at }}</span></p>
-                <p class="lead mb-0"><span class="badge badge-dark">{{ $videos->total() }} videos</span></p>
+    <h3>{{ trans('user.channel.channel_videos', ['user' =>  $user->nickname]) }}</h3>
+
+    <hr>
+
+    <!-- Botones de filtro y orden -->
+    @if ($videos->count() > 0)
+        <div class="row mb-3">
+            <div class="col">
+                <button class="btn btn-outline-primary active" data-sort="recent" onclick="fetchVideos('recent')">{{ trans('user.channel.filters.recent') }}</button>
+                <button class="btn btn-outline-primary" data-sort="likes" onclick="fetchVideos('likes')">{{ trans('user.channel.filters.likes') }}</button>
+                <button class="btn btn-outline-primary" data-sort="comments" onclick="fetchVideos('comments')">{{ trans('user.channel.filters.comments') }}</button>
+            </div>
+
+            <div class="col d-flex justify-content-end">
+                @include('partials.pagination', ['paginator' => $videos])
             </div>
         </div>
+    @endif
 
-        <h3>Videos</h3>
-        <hr>
+    <!-- Listado de videos del usuario -->
+    <div id="videos-list">
+        @include('user.partials.video-list', ['videos' => $videos])
+    </div>
 
-        <!-- Botones de filtro y orden -->
-        @if ($videos->count() > 0)
-            <div class="row mb-3">
-                <div class="col">
-                    <button class="btn btn-outline-primary active" data-sort="recent" onclick="fetchVideos('recent')">{{ config('filters.recent.label') }}</button>
-                    <button class="btn btn-outline-primary" data-sort="likes" onclick="fetchVideos('likes')">{{ config('filters.likes.label') }}</button>
-                    <button class="btn btn-outline-primary" data-sort="comments" onclick="fetchVideos('comments')">{{ config('filters.comments.label') }}</button>
-                </div>
+    <!-- Página de paginación -->
+    @include('partials.pagination', ['paginator' => $videos])
+</div>
 
-                <div class="col d-flex justify-content-end">
-                    @include('partials.pagination', ['paginator' => $videos])
-                </div>
-            </div>
-        @endif
-
-        <!-- Listado de videos del usuario -->
-        <div id="videos-list">
-            @include('user.partials.video-list', ['videos' => $videos])
-        </div>
-
-        <!-- Página de paginación -->
-        @include('partials.pagination', ['paginator' => $videos])
 
 @endsection
 
 @section('js')
     <script>
-         let currentSort = 'recent';
+        let currentSort = 'recent';
 
         function fetchVideos(sort) {
 
             if (sort === currentSort) {
-                console.log('La opción seleccionada ya está activa. No se realizará la petición.');
                 return; // Salir de la función
             }
 
