@@ -46,5 +46,41 @@ class UserController extends Controller
         return view('user.profile');
     }
 
+    public function update(Request $request) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'nickname' => 'nullable|string|max:255',
+            'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+
+        $user->name = $request->input('name');
+        $user->surname = $request->input('surname');
+        $user->nickname = $request->input('nickname');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '-' . $image->getClientOriginalName();
+            Storage::disk('images/profile')->put($imageName, File::get($image));
+
+            if ($user->image && Storage::disk('images/profile')->exists($user->image)) {
+                Storage::disk('images/profile')->delete($user->image);
+            }
+
+            $user->image = $imageName;
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('message', 'Perfil actualizado correctamente.');
+    }
+
+    public function getImage($filename) {
+        $file = Storage::disk('images/profile')->get($filename);
+        return new Response($file, 200);
+    }
 
 }
