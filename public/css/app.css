@@ -12131,3 +12131,8 @@ a.text-dark:focus {
   transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
+.object-cover {
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
+}
+

@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/profile', 'UserController@edit')->middleware('auth')->name('user.edit');
 Route::get('/channel/{user_id}', 'UserController@channel')->middleware('auth')->name('user.channel');
 
 // Video Route

@@ -66,3 +66,7 @@
     background-color 0.3s ease,
     opacity 0.3s ease;
 }
+
+.object-cover {
+  object-fit: cover !important;
+}
