@@ -24,7 +24,7 @@ class VideoController extends Controller
             'title' => 'required|min:5|max:255',
             'description' => 'required|max:250',
             'video'  => 'required|mimes:mp4|max:5120',  // 5 MB
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 2 MB
+            'image' => 'nullable|mimes:jpeg,png,jpg|max:2048', // 2 MB
         ]);
 
         $video = new Video;
