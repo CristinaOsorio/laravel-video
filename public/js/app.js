@@ -14121,7 +14121,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(36);
+module.exports = __webpack_require__(37);
 
 
 /***/ }),
@@ -14136,6 +14136,7 @@ module.exports = __webpack_require__(36);
  */
 
 __webpack_require__(12);
+__webpack_require__(36);
 
 // window.Vue = require('vue');
 
@@ -36901,6 +36902,26 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 36 */
+/***/ (function(module, exports) {
+
+window.previewImage = function (event, id, name) {
+    console.log('ej');
+
+    var file = event.target.files[0];
+
+    if (!file) return;
+
+    var reader = new FileReader();
+    reader.onload = function () {
+        document.getElementById(id).src = reader.result;
+    };
+    reader.readAsDataURL(file);
+    var fileName = file.name;
+    document.getElementById(name).textContent = fileName;
+};
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
