@@ -1,5 +1,4 @@
-window.previewImage = function (event, id, name) {
-    console.log('ej')
+function previewImage(event, id, name) {
 
     const file = event.target.files[0];
         
@@ -13,3 +12,7 @@ window.previewImage = function (event, id, name) {
     const fileName = file.name;
     document.getElementById(name).textContent = fileName;
 };
+
+window.previewImage = previewImage;
+
+export default previewImage;
