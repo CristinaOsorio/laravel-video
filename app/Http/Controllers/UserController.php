@@ -50,7 +50,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'nickname' => 'nullable|string|max:255',
+            'nickname' => 'required|string|max:255',
             'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ]);
 
