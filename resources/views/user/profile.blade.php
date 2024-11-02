@@ -28,53 +28,8 @@
 
         <!-- Seguridad -->
         <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
-            <div class="card mb-4 mt-4">
-                <div class="card-header">Opciones de Seguridad</div>
-                <div class="card-body">
-                    <form action="#" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <!-- Contraseña actual -->
-                        <div class="form-group">
-                            <label for="current_password">Contraseña Actual</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                </div>
-                                <input type="password" name="current_password" id="current_password" class="form-control" required>
-                            </div>
-                        </div>
+            @include('user.components.security-section')
 
-                        <!-- Nueva contraseña -->
-                        <div class="form-group mt-3">
-                            <label for="new_password">Nueva Contraseña</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                </div>
-                                <input type="password" name="new_password" id="new_password" class="form-control" required>
-                            </div>
-                            <small class="form-text text-muted">Debe tener al menos 8 caracteres, incluyendo una letra mayúscula, un número y un símbolo.</small>
-                        </div>
-
-                        <!-- Confirmar nueva contraseña -->
-                        <div class="form-group mt-3">
-                            <label for="confirm_password">Confirmar Nueva Contraseña</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-check-double"></i></span>
-                                </div>
-                                <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <!-- Botón de actualizar -->
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-danger mt-4">Actualizar Contraseña</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
         
         <!-- Configuración -->

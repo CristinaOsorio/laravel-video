@@ -22,5 +22,17 @@ return [
         'message' => [
             'success' => 'Tus cambios han sido guardados exitosamente.'
         ],
-    ]
+    ],
+    'security' => [
+        'validation' => [
+            'current_password' => 'La contraseña actual es obligatoria.',
+            'new_password' => 'La nueva contraseña es obligatoria.',
+            'password_min' => 'La nueva contraseña debe tener al menos 8 caracteres.',
+            'password_confirmed' => 'La contraseña no coincide.',
+            'incorrect_password' => 'La contraseña actual no es correcta.',
+        ],
+        'message' => [
+            'success' => 'Tu contraseña ha sido actualizada exitosamente.',
+        ],
+    ],
 ];

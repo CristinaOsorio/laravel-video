@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 use App\Http\Models\User;
 use App\Http\Models\Video;
@@ -76,6 +78,34 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('message', 'Perfil actualizado correctamente.');
+    }
+
+    public function updatePassword(Request $request) {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:3|confirmed',
+        ], [
+            'current_password.required' => __('user.security.validation.current_password'),
+            'new_password.required' => __('user.security.validation.new_password'),
+            'new_password.min' => __('user.security.validation.password_min'),
+            'new_password.confirmed' => __('user.security.validation.password_confirmed'),
+        ]);
+
+        // Verifica si la contraseña actual es correcta
+        if (!Hash::check($request->current_password, auth()->user()->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => __('user.security.validation.incorrect_password'),
+            ]);
+        }
+
+        // Actualiza la contraseña del usuario
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        
+
+        return redirect()->back()->with('message', __('user.profile.message.success'));
     }
 
     public function getImage($filename) {

@@ -27,6 +27,9 @@ Route::put('/profile', 'UserController@update')->middleware('auth')->name('user.
 Route::get('/profile/image/{filename}', 'UserController@getImage')->name('user.image');
 Route::get('/channel/{user_id}', 'UserController@channel')->middleware('auth')->name('user.channel');
 
+Route::put('/profile/update-password', 'UserController@updatePassword')->name('user.update-password');
+
+
 // Video Route
 Route::get('/videos/crear', 'VideoController@create')->middleware('auth')->name('video.create');
 Route::post('/videos/crear', 'VideoController@store')->middleware('auth')->name('video.store');
