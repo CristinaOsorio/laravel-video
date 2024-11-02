@@ -110,16 +110,6 @@
 
 @endsection
 
-@section('js')
-    <script>
-        document.getElementById('image').addEventListener('change', function() {
-            const img = document.getElementById('profile-image');
-            img.src = URL.createObjectURL(this.files[0]);
-            const fileName = this.files[0].name;
-            document.querySelector('label[for="image"]').textContent = fileName;
-        });
-    </script>
-@endsection
 
 
 
