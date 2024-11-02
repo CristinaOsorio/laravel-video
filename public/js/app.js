@@ -14121,7 +14121,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(37);
+module.exports = __webpack_require__(38);
 
 
 /***/ }),
@@ -14137,6 +14137,7 @@ module.exports = __webpack_require__(37);
 
 __webpack_require__(12);
 __webpack_require__(36);
+__webpack_require__(37);
 
 // window.Vue = require('vue');
 
@@ -36902,10 +36903,11 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 36 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-window.previewImage = function (event, id, name) {
-    console.log('ej');
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function previewImage(event, id, name) {
 
     var file = event.target.files[0];
 
@@ -36920,8 +36922,38 @@ window.previewImage = function (event, id, name) {
     document.getElementById(name).textContent = fileName;
 };
 
+window.previewImage = previewImage;
+
+/* harmony default export */ __webpack_exports__["default"] = (previewImage);
+
 /***/ }),
 /* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function togglePasswordVisibility(id) {
+    var input = document.getElementById(id);
+    var icon = document.getElementById('toggleIcon-' + id);
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+        return;
+    }
+
+    input.type = "password";
+    icon.classList.remove('fa-eye-slash');
+    icon.classList.add('fa-eye');
+}
+
+window.togglePasswordVisibility = togglePasswordVisibility;
+
+/* harmony default export */ __webpack_exports__["default"] = (togglePasswordVisibility);
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

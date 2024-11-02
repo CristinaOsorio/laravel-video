@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./preview');
+require('./password-toggle');
 
 // window.Vue = require('vue');
 

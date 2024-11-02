@@ -96,7 +96,7 @@
         </footer>
 
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}?v={{ time() }}"></script>
     @yield('js')
 
 </body>
