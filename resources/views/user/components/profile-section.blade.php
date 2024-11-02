@@ -1,23 +1,12 @@
 <div class="card mb-4">
-    <div class="card-header">Información Básica</div>
+    <div class="card-header">{{ __('user.profile.basic_info') }}</div>
     <div class="card-body">
 
-    @if(session('message'))
-        <div class="alert alert-success col-12" role="alert">
-            {{ session('message') }}
-        </div>
-    @endif
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
+        @if(session('message'))
+            <div class="alert alert-success col-12" role="alert">
+                {{ __('user.profile.message.success') }}
+            </div>
+        @endif
 
         <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -27,70 +16,72 @@
                 <div class="col-md-5 col-lg-4">
                     <!-- Imagen de perfil con opción de carga -->
                     <div class="text-center mb-4">
-                        <img id="profile-image" 
-                            src="{{ Storage::disk('images/profile')->has(auth()->user()->image) 
-                                        ? url('profile/image/'.auth()->user()->image) 
-                                        : asset('images/user/profile-default.svg') }}" 
-                            alt="Imagen de perfil de {{ auth()->user()->name }}" 
-                            class="rounded-circle img-thumbnail object-cover" 
-                            style="width: 150px; height: 150px;">
-                        <div class="mt-2">
-                            <label for="image" class="btn btn-outline-primary btn-sm">Cambiar Imagen</label>
-                            <input type="file" name="image" id="image" class="d-none">
-                        </div>
+                        @include('components.forms.profile_image_input', [
+                            'label' => __('user.profile.profile_picture'), 
+                            'name' => 'profile_image', 
+                            'id' => 'profile_image',
+                            'imagePath' => Storage::disk('images/profile')->has(auth()->user()->image) 
+                                                    ? url('profile/image/'.auth()->user()->image) 
+                                                    : asset('images/user/profile-default.svg')
+                        ])
                     </div>
                 </div>
                 <div class="col-md-7 col-lg-8">
                     <div class="row">
-                        <!-- Nombre de usuario -->
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ auth()->user()->name }}">
-                            </div>
+                            <!-- Nombre de usuario -->
+                            @include('components.forms.input', [
+                                'label' => __('user.profile.name'), 
+                                'name' => 'name', 
+                                'id' => 'name', 
+                                'type' => 'text', 
+                                'value' => auth()->user()->name ?? '', 
+                                'attributes' => 'required'
+                            ])
                         </div>
 
-                        <!-- Apellidos de usuario -->
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="surname">Apellido</label>
-                                <input type="text" name="surname" id="surname" class="form-control" value="{{ auth()->user()->surname }}">
-                            </div>
+                            <!-- Apellido de usuario -->
+                            @include('components.forms.input', [
+                                'label' => __('user.profile.surname'), 
+                                'name' => 'surname', 
+                                'id' => 'surname', 
+                                'type' => 'text', 
+                                'value' => auth()->user()->surname ?? '', 
+                                'attributes' => 'required'
+                            ])
                         </div>
 
-                        <!-- Apodo o nombre de usuario -->
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="nickname">Nickname</label>
-                                <input type="text" name="nickname" id="nickname" class="form-control" value="{{ auth()->user()->nickname }}">
-                            </div>
+                            <!-- Apodo o nombre de usuario -->
+                            @include('components.forms.input', [
+                                'label' => __('user.profile.nickname'), 
+                                'name' => 'nickname', 
+                                'id' => 'nickname', 
+                                'type' => 'text', 
+                                'value' => auth()->user()->nickname ?? '', 
+                                'attributes' => 'required'
+                            ])
                         </div>
 
-                        <!-- Email (no editable) -->
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="email">Correo Electrónico</label>
-                                <input type="email" name="email" id="email" class="form-control" value="{{ auth()->user()->email }}" readonly>
-                            </div>
+                            <!-- Correo Electrónico (no editable) -->
+                            @include('components.forms.input', [
+                                'label' => __('user.profile.email'), 
+                                'name' => 'email', 
+                                'id' => 'email', 
+                                'type' => 'email', 
+                                'value' => auth()->user()->email ?? '', 
+                                'attributes' => 'readonly'
+                            ])
                         </div>
-                    </div><!-- Botón de guardar alineado a la derecha -->
+                    </div>
+                    <!-- Botón de guardar alineado a la derecha -->
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary mt-4">Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary mt-4">{{ __('user.profile.save_changes') }}</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
-@section('js')
-    <script>
-        document.getElementById('image').addEventListener('change', function() {
-            const img = document.getElementById('profile-image');
-            img.src = URL.createObjectURL(this.files[0]);
-            const fileName = this.files[0].name;
-            document.querySelector('label[for="image"]').textContent = fileName;
-        });
-    </script>
-
-@endsection
