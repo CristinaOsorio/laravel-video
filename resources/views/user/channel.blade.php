@@ -32,7 +32,7 @@
     @endif
 
     <!-- Listado de videos del usuario -->
-    <div id="videos-list">
+    <div class="row" id="videos-list">
         @include('user.partials.video-list', ['videos' => $videos])
     </div>
 
