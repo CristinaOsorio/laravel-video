@@ -6,4 +6,6 @@ return [
     'search_placeholder' => '¿Qué quieres ver?',
     'search' => 'Buscar',
     'upload_video' => 'Subir video',
+    'channel' => 'Mi canal',
+    'settings' => 'Configuraciones',
 ];

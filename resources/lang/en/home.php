@@ -6,4 +6,6 @@ return [
     'search_placeholder' => 'What would you like to watch?',
     'search' => 'Search',
     'upload_video' => 'Upload Video',
+    'channel' => 'My channel',
+    'settings' => 'Settings',
 ];
