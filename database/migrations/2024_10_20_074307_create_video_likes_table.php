@@ -16,9 +16,9 @@ class CreateVideoLikesTable extends Migration
         Schema::create('video_likes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('video_id');
-            $table->foreign('video_id')->references('id')->on('videos');
+            $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade');
             $table->boolean('is_like'); 
             $table->unique(['user_id', 'video_id']);
             $table->timestamps();

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Http\Models\VideoLike;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -37,12 +38,38 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getCreatedAtAttribute($value) {
+        return Carbon::parse($value)->format('d \d\e F \d\e Y');
+    }
+
     public function videoLikes() {
         return $this->hasMany(VideoLike::class);
     }
-    
-    public function getCreatedAtAttribute($value)
-    {
-        return Carbon::parse($value)->format('d \d\e F \d\e Y');
+
+    public function videos() {
+        return $this->hasMany(Video::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            foreach ($user->videos as $video) {
+                if (Storage::disk('videos')->exists($video->video_path)) {
+                    Storage::disk('videos')->delete($video->video_path);
+                }
+                if (Storage::disk('images')->exists($video->image)) {
+                    Storage::disk('images')->delete($video->image);
+                }
+            }
+
+            if ($user->image && Storage::disk('images/profile')->exists($user->image)) {
+                Storage::disk('images/profile')->delete($user->image);
+            }
+        });
     }
 }
