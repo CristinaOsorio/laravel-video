@@ -18,8 +18,8 @@
                     <div class="text-center mb-4">
                         @include('components.forms.profile_image_input', [
                             'label' => __('user.profile.profile_picture'), 
-                            'name' => 'profile_image', 
-                            'id' => 'profile_image',
+                            'name' => 'image', 
+                            'id' => 'image',
                             'imagePath' => Storage::disk('images/profile')->has(auth()->user()->image) 
                                                     ? url('profile/image/'.auth()->user()->image) 
                                                     : asset('images/user/profile-default.svg')
