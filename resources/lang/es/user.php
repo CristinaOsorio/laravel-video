@@ -11,6 +11,11 @@ return [
             'comments' => 'Comentarios',
         ],
     ],
+    'settings' => [
+        'profile' => 'Información Personal',
+        'security' => 'Seguridad',
+        'settings' => 'Configuración',
+    ],
     'profile' => [
         'basic_info' => 'Información Básica',
         'profile_picture' => 'Foto de perfil',
