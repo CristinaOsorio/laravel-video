@@ -26,6 +26,7 @@ Route::get('language/{locale}', 'LanguageController@changeLanguage')->name('lang
 
 Route::get('/profile', 'UserController@edit')->middleware('auth')->name('user.edit');
 Route::put('/profile', 'UserController@update')->middleware('auth')->name('user.update');
+Route::delete('/profile', 'UserController@destroy')->middleware('auth')->name('user.destroy');
 Route::get('/profile/image/{filename}', 'UserController@getImage')->name('user.image');
 Route::get('/channel/{user_id}', 'UserController@channel')->middleware('auth')->name('user.channel');
 

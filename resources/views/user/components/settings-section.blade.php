@@ -14,10 +14,11 @@
     <div class="card-header text-danger font-weight-bold">Eliminar Cuenta</div>
     <div class="card-body">
         <p class="text-muted">Esta acción es irreversible. Si eliminas tu cuenta, toda tu información será permanentemente eliminada y no podrá ser recuperada.</p>
-        <form action="#" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible.')">
+        <form action="{{ route('user.destroy') }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible.')">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">Eliminar mi cuenta</button>
         </form>
+
     </div>
 </div>

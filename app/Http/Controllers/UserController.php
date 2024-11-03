@@ -113,4 +113,13 @@ class UserController extends Controller
         return new Response($file, 200);
     }
 
+    public function destroy(Request $request) {
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return redirect('/')->with('message', 'Tu cuenta ha sido eliminada permanentemente.');
+    }
+
 }
