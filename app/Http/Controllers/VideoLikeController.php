@@ -6,8 +6,7 @@ use App\Http\Models\VideoLike;
 
 class VideoLikeController extends Controller
 {
-    private function toggleLikeDislike($video_id, $is_like)
-    {
+   private function toggleLikeDislike($video_id, $is_like) {
         $user = auth()->user();
 
         $existingLike = VideoLike::where('video_id', $video_id)
@@ -16,7 +15,7 @@ class VideoLikeController extends Controller
 
         if ($existingLike && $existingLike->is_like == $is_like) {
             $existingLike->delete();
-            return $this->countLikesDislikes($video_id);
+            return $this->countLikesDislikes($video_id, null);
         }
 
         if ($existingLike) {
@@ -29,17 +28,23 @@ class VideoLikeController extends Controller
             ]);
         }
 
-        return $this->countLikesDislikes($video_id);
+        return $this->countLikesDislikes($video_id, $is_like);
     }
 
-    private function countLikesDislikes($video_id)
-    {
+    private function countLikesDislikes($video_id, $userAction = null) {
         $likes_count = VideoLike::where('video_id', $video_id)->where('is_like', true)->count();
         $dislikes_count = VideoLike::where('video_id', $video_id)->where('is_like', false)->count();
+
+        if ($userAction === null) {
+            $userStatus = null;
+        } else {
+            $userStatus = $userAction ? 'like' : 'dislike';
+        }
 
         return response()->json([
             'likes_count' => $likes_count,
             'dislikes_count' => $dislikes_count,
+            'user_status' => $userStatus,
         ]);
     }
 
@@ -50,4 +55,5 @@ class VideoLikeController extends Controller
     public function dislike($video_id) {
         return $this->toggleLikeDislike($video_id, false);
     }
+
 }

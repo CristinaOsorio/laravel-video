@@ -22,14 +22,14 @@
                                 </p>
                                 
                                 <div>
-                                    <button id="like-btn" class="btn" data-video-id="{{ $video->id }}">
+                                    <button id="like-btn" class="btn text-primary" data-video-id="{{ $video->id }}">
                                         <i class="fa-{{ $user_reaction === 'like' ? 'solid' : 'regular' }} fa-thumbs-up"></i>
-                                        <span id="likes-count">{{ $likes_count }}</span>
+                                        <span id="likes-count" class="text-dark">{{ $likes_count }}</span>
                                     </button>
 
-                                    <button id="dislike-btn" class="btn" data-video-id="{{ $video->id }}">
+                                    <button id="dislike-btn" class="btn text-primary" data-video-id="{{ $video->id }}">
                                         <i class="fa-{{ $user_reaction === 'dislike' ? 'solid' : 'regular' }} fa-thumbs-down"></i>
-                                        <span id="dislikes-count">{{ $dislikes_count }}</span>
+                                        <span id="dislikes-count" class="text-dark">{{ $dislikes_count }}</span>
                                     </button>
                                 </div>
 
@@ -66,12 +66,12 @@
 
             function updateReactionCounts(likesCount, dislikesCount, userReaction) {
                 $('#likes-count').text(likesCount);
-                $('#dislikes-count').text(likesCount);
+                $('#dislikes-count').text(dislikesCount);
 
-                if (userReaction === true) {
+                if (userReaction === 'like') {
                     $('#like-btn i').removeClass('fa-regular').addClass('fa-solid');
                     $('#dislike-btn i').removeClass('fa-solid').addClass('fa-regular');
-                } else if (userReaction === false) {
+                } else if (userReaction === 'dislike') {
                     $('#dislike-btn i').removeClass('fa-regular').addClass('fa-solid');
                     $('#like-btn i').removeClass('fa-solid').addClass('fa-regular');
                 } else {
@@ -79,6 +79,7 @@
                     $('#dislike-btn i').removeClass('fa-solid').addClass('fa-regular');
                 }
             }
+
 
             async function handleReaction(videoId, isLike) {
                 try {
@@ -89,7 +90,7 @@
                             _token: '{{ csrf_token() }}'
                         }
                     });
-                    updateReactionCounts(response.likes_count, response.dislikes_count, isLike);
+                    updateReactionCounts(response.likes_count, response.dislikes_count, response.user_status);
 
                 } catch (error) {
                     console.error('Error al actualizar la reacción:', error);
