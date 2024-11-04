@@ -127,7 +127,7 @@
 
         <!-- Botones de acción -->
         <button type="submit" class="btn btn-primary btn-upload">{{ $buttonText ?? trans('videos.video_form.form.submit') }}</button>
-        <a href="{{ url('user.channel', auth()->id()) }}" class="btn btn-secondary btn-cancel">{{ trans('videos.video_form.form.cancel') }}</a>
+        <a href="{{ route('user.channel', auth()->id()) }}" class="btn btn-secondary btn-cancel">{{ trans('videos.video_form.form.cancel') }}</a>
     </form>
 </div>
 
